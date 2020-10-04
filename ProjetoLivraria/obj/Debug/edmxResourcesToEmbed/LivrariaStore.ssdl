@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LivrariaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Autor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Livros">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Descricao" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Preco" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Autor_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Livros_Autor">
+    <End Role="Autor" Type="Self.Autor" Multiplicity="1" />
+    <End Role="Livros" Type="Self.Livros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Livros">
+        <PropertyRef Name="Autor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LivrariaModelStoreContainer">
+    <EntitySet Name="Autor" EntityType="Self.Autor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Livros" EntityType="Self.Livros" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Livros_Autor" Association="Self.FK_Livros_Autor">
+      <End Role="Autor" EntitySet="Autor" />
+      <End Role="Livros" EntitySet="Livros" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

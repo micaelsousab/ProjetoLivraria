@@ -1,0 +1,25 @@
+﻿@model ProjetoLivraria.Models.AutorModel
+
+@{
+    ViewBag.Title = "Adicionar Novo Autor";
+}
+
+<h2>Adicionar Novo Autor</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "col-md-2" })
+        <div class="col-md-10">
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div> <br /> <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <a href="@Url.Action("Index")" class="btn btn-default">Voltar</a>
+        </div>
+    </div>
+}

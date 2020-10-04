@@ -1,0 +1,57 @@
+﻿@model ProjetoLivraria.Models.ViewModels.ListagemAutorViewModel
+
+@{
+    ViewBag.Title = "Autores";
+}
+
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success" role="alert" style="margin-top: 1rem;">
+        @TempData["Mensagem"]
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+        <h2>Autores</h2>
+    </div>
+    <div>
+        <a href="@Url.Action("Adicionar")" class="btn btn-success">Adicionar</a>
+    </div>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ListaAutores.Count() > 0)
+        {
+            foreach (var autor in Model.ListaAutores)
+            {
+                <tr>
+                    <td>@autor.Id</td>
+                    <td>@autor.Nome</td>
+                    <td>
+                        <a href="@Url.Action("Editar", new { id = autor.Id })">Editar</a>
+                        <a href="@Url.Action("Deletar", new { id = autor.Id })">Deletar</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">Nenhum Autor Registrado!</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
